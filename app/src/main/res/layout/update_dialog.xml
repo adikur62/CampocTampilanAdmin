@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/EditDeskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan deskripsi"
+            android:textColorHint="#FF538D"
+            android:textColor="#FF538D"
+            android:background="@drawable/et_login"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:padding="15dp"/>
+
+        <EditText
+            android:id="@+id/EditFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Masukkan URL foto"
+            android:textColorHint="#FF538D"
+            android:textColor="#FF538D"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/et_login"
+            android:padding="15dp"/>
+
+        <EditText
+            android:id="@+id/EditLokasi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#FF538D"
+            android:textColor="#FF538D"
+            android:hint="Masukkan lokasi"
+            android:background="@drawable/et_login"
+            android:layout_marginBottom="10dp"
+            android:padding="15dp"/>
+
+
+        <Button
+            android:id="@+id/ButtonUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update"
+            android:background="@drawable/btn_kotak"
+            android:layout_marginBottom="10dp"
+            android:textColor="#ffff"/>
+
+        <Button
+            android:id="@+id/ButtonDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:background="@drawable/btn_kotak"
+            android:textColor="#ffff"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
