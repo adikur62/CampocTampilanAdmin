@@ -36,12 +36,14 @@ public class LocationList extends ArrayAdapter<Model> {
         TextView textViewDeskripsi = (TextView) listViewItem.findViewById(R.id.ReadDeskripsi);
         TextView textViewFoto = (TextView) listViewItem.findViewById(R.id.ReadFoto);
         TextView textViewLokasi = (TextView) listViewItem.findViewById(R.id.ReadLokasi);
+        TextView textViewDetail = (TextView) listViewItem.findViewById(R.id.ReadDetail);
 
         Model model = locations.get(position);
 
         textViewDeskripsi.setText(model.getDeskripsi());
         textViewFoto.setText(model.getFoto());
         textViewLokasi.setText(model.getLokasi());
+        textViewDetail.setText(model.getDetail());
 
         return listViewItem;
     }

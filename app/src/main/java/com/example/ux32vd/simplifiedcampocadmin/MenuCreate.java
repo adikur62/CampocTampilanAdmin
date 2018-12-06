@@ -16,7 +16,7 @@ public class MenuCreate extends AppCompatActivity {
 
     DatabaseReference mRef;
 
-    EditText createDeskripsi, createFoto, createLokasi;
+    EditText createDeskripsi, createFoto, createLokasi, createDetail;
     Button buttonCreate;
 
 
@@ -34,6 +34,8 @@ public class MenuCreate extends AppCompatActivity {
         createDeskripsi = (EditText) findViewById(R.id.CreateDeskripsi);
         createFoto = (EditText) findViewById(R.id.CreateFoto);
         createLokasi = (EditText) findViewById(R.id.CreateLokasi);
+        createDetail = (EditText) findViewById(R.id.CreateDetail);
+
         buttonCreate = (Button) findViewById(R.id.ButtonCreateData);
 
         buttonCreate.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +54,7 @@ public class MenuCreate extends AppCompatActivity {
         String deskripsi = createDeskripsi.getText().toString().trim();
         String foto = createFoto.getText().toString().trim();
         String lokasi = createLokasi.getText().toString().trim();
+        String detail = createDetail.getText().toString().trim();
 
         //checking if the value is provided
         if (!TextUtils.isEmpty(deskripsi)) {
@@ -62,7 +65,7 @@ public class MenuCreate extends AppCompatActivity {
             String id = mRef.push().getKey();
 
             //creating an Artist Object
-            Model model = new Model(id, deskripsi, foto, lokasi);
+            Model model = new Model(id, deskripsi, foto, lokasi, detail);
             //Saving the Artist
             mRef.child(id).setValue(model);
 
@@ -70,6 +73,7 @@ public class MenuCreate extends AppCompatActivity {
             createDeskripsi.setText("");
             createFoto.setText("");
             createLokasi.setText("");
+            createDetail.setText("");
 
             //displaying a success toast
             Toast.makeText(this, "Lokasi ditambahkan", Toast.LENGTH_LONG).show();

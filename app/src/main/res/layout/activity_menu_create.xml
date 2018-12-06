@@ -78,6 +78,19 @@
                 android:layout_marginBottom="10dp"
                 android:hint="Masukkan lokasi" />
 
+            <EditText
+                android:id="@+id/CreateDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_login"
+                android:padding="15dp"
+                android:layout_marginRight="30dp"
+                android:textColor="#FF538D"
+                android:textColorHint="#FF538D"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Masukkan detail" />
+
             <Button
                 android:id="@+id/ButtonCreateData"
                 android:layout_width="match_parent"

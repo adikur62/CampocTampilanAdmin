@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.ux32vd.simplifiedcampocadmin.helper.LocationList;
 import com.example.ux32vd.simplifiedcampocadmin.helper.Model;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +35,7 @@ public class MenuAdmin extends AppCompatActivity {
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference mRef;
     ImageButton createbutton, updatebutton, deletebutton;
+    ImageButton logoutbutton;
     ListView listViewLocation;
 
     //a list to store all the artist from firebase database
@@ -54,6 +56,18 @@ public class MenuAdmin extends AppCompatActivity {
 //        ImageButton CreateButton = (ImageButton) findViewById(R.id.createbutton);
 //        ImageButton UpdateButton = (ImageButton) findViewById(R.id.updatebutton);
 //        ImageButton DeleteButton = (ImageButton) findViewById(R.id.deletebutton);
+
+        ImageButton LogoutButton = (ImageButton) findViewById(R.id.ButtonLogout);
+
+        LogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(MenuAdmin.this, MenuLogin.class));
+                finish();
+            }
+        });
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +90,7 @@ public class MenuAdmin extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Model model = locations.get(position);
-                showUpdateDeleteDialog(model.getId(), model.getDeskripsi(), model.getFoto(), model.getLokasi());
+                showUpdateDeleteDialog(model.getId(), model.getDeskripsi(), model.getFoto(), model.getLokasi(), model.getDetail());
 
                 return false;
             }
@@ -111,7 +125,7 @@ public class MenuAdmin extends AppCompatActivity {
         });
     }
 
-    private void showUpdateDeleteDialog (final String id, String deskripsi, String foto, String lokasi) {
+    private void showUpdateDeleteDialog (final String id, String deskripsi, String foto, String lokasi, String detail) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -121,6 +135,7 @@ public class MenuAdmin extends AppCompatActivity {
         final EditText EditDeskripsi = (EditText) dialogView.findViewById(R.id.EditDeskripsi);
         final EditText EditFoto = (EditText) dialogView.findViewById(R.id.EditFoto);
         final EditText EditLokasi = (EditText) dialogView.findViewById(R.id.EditLokasi);
+        final EditText EditDetail = (EditText) dialogView.findViewById(R.id.EditDetail);
         final Button ButtonUpdate = (Button) dialogView.findViewById(R.id.ButtonUpdate);
         final Button ButtonDelete = (Button) dialogView.findViewById(R.id.ButtonDelete);
 
@@ -135,6 +150,7 @@ public class MenuAdmin extends AppCompatActivity {
                 String deskripsi = EditDeskripsi.getText().toString().trim();
                 String foto = EditFoto.getText().toString().trim();
                 String lokasi = EditLokasi.getText().toString().trim();
+                String detail = EditDetail.getText().toString().trim();
 
                 //Validasi jika kolom update kosong
                 if (TextUtils.isEmpty(deskripsi)) {
@@ -152,7 +168,12 @@ public class MenuAdmin extends AppCompatActivity {
                     return;
                 }
 
-                updateLokasi(id, deskripsi, foto, lokasi);
+                if (TextUtils.isEmpty(lokasi)) {
+                    EditDetail.setError("Detail diperlukan");
+                    return;
+                }
+
+                updateLokasi(id, deskripsi, foto, lokasi, detail);
 
                 alertDialog.dismiss();
 
@@ -173,17 +194,16 @@ public class MenuAdmin extends AppCompatActivity {
         Toast.makeText(this, "Lokasi berhasil dihapus", Toast.LENGTH_SHORT).show();
     }
 
-    private boolean updateLokasi(String id, String deskripsi, String foto, String lokasi) {
+    private boolean updateLokasi(String id, String deskripsi, String foto, String lokasi, String detail) {
         //getting the specified artist reference
         mRef = FirebaseDatabase.getInstance().getReference("Data").child(id);
 
         //updating artist
-        Model model = new Model(id, deskripsi, foto, lokasi);
+        Model model = new Model(id, deskripsi, foto, lokasi, detail);
         mRef.setValue(model);
         Toast.makeText(getApplicationContext(), "Lokasi Updated", Toast.LENGTH_LONG).show();
         return true;
     }
-
 
 }
 

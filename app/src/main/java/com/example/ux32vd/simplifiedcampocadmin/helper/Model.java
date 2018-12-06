@@ -6,16 +6,18 @@ public class Model {
     String deskripsi;
     String foto;
     String lokasi;
+    String detail;
 
     public Model(){
 
     }
 
-    public Model(String id, String deskripsi, String foto, String lokasi) {
+    public Model(String id, String deskripsi, String foto, String lokasi, String detail) {
         this.id = id;
         this.deskripsi = deskripsi;
         this.foto = foto;
         this.lokasi = lokasi;
+        this.detail = detail;
     }
 
     public String getId() {
@@ -33,4 +35,6 @@ public class Model {
     public String getLokasi() {
         return lokasi;
     }
+
+    public String getDetail() { return detail; }
 }
